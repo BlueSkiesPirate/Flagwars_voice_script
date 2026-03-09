@@ -4,8 +4,13 @@ import json
 from vosk import Model, KaldiRecognizer
 from rapidfuzz import process
 
+from pynput.keyboard import Controller, Key
+# import threading
+
+#Keyboard controller to send key presses
+keyboard = Controller()
+
 print("Program started")
-print("Running file:", __file__)
 
 word_library = ["sword", "three", "four", "five"]
 
@@ -49,4 +54,19 @@ with sd.RawInputStream(
 
                 print("Heard:", spoken_word)
                 print("Closest match:", match[0])
+                
+                closest_match = match[0]
+
+                match closest_match:
+                    case "sword":
+                        key_to_press = "1"
+                    case "three":
+                        key_to_press = "3"
+                    case "four":
+                        key_to_press = "4"
+                    case "five":
+                        key_to_press = "5"
+                
+                keyboard.press(key_to_press)
+                keyboard.release(key_to_press)
                 print()
